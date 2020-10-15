@@ -1,26 +1,33 @@
+import { Container, CssBaseline, Typography } from '@material-ui/core';
+import { observer } from 'mobx-react-lite';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CategoryForm from './components/CategoryForm';
+import Category from './components/Category';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const App = observer(({ store }) => {
+  const onCategoryRemove = (id) => store.removeCategory(id);
+
+  const price = (
+    <Typography>Стоимость всех товаров в списке — {store.totalPrice} ₽</Typography>
   );
-}
+
+  return (
+    <>
+      <CssBaseline />
+      <Container className="container">
+        <Typography variant="h3" align="center">Список покупок</Typography>
+        <CategoryForm store={store} />
+        { store.categories.map((category) => (
+          <Category
+            key={category.id}
+            category={category}
+            onCategoryRemove={onCategoryRemove.bind(null, category.id)}
+          />
+        )) }
+        { store.totalPrice ? price : null }
+      </Container>
+    </>
+  );
+})
 
 export default App;

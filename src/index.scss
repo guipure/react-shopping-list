@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container {
+  padding: 5rem 0;
+}
+
+.card {
+  margin: 2rem 0;
+}
+
+.product-info {
+  display: flex;
+  min-width: 15rem;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.bought {
+  text-decoration: line-through;
+}
